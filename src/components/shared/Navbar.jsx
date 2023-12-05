@@ -43,7 +43,7 @@ const Nav = () => {
         </Navbar.Link>
         <Navbar.Link href="about">About</Navbar.Link>
         <Navbar.Link href="events">Events</Navbar.Link>
-        <Navbar.Link href="#">Services</Navbar.Link>
+        <Navbar.Link href="login">login</Navbar.Link>
         <Navbar.Link href="research">Research</Navbar.Link>
         <Navbar.Link href="team">Team</Navbar.Link>
         <Navbar.Link href="#">Contact</Navbar.Link>
