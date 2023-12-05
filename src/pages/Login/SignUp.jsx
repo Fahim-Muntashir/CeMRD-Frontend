@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-// import { AuthContext } from "../../Providers/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-  //   const { createUser, signInWithGoogle } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, updateUserProfile } =
+    useContext(AuthContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +13,20 @@ const SignUp = () => {
   const handleRegistration = (event) => {
     event.preventDefault();
     // console.log(name, email, password, photoURL);
-    // createUser(email, password);
+    createUser(email, password).then(() => {
+      updateUserProfile(name, photoURL)
+        .then(() => {
+          console.log("user prfile update");
+          Swal.fire({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
   };
 
   return (
@@ -96,12 +111,12 @@ const SignUp = () => {
               <div className="mb-6 text-center">
                 <input
                   type="submit"
-                  className="w-full px-4 py-2 font-bold text-white bg-yellow-500 rounded-full hover:bg-yellow-700 focus:outline-none focus:shadow-outline"
+                  className="w-full px-4 py-2 font-bold text-white cursor-pointer bg-yellow-500 rounded-full hover:bg-yellow-700 focus:outline-none focus:shadow-outline"
                   value="Sign Up"
                 />
               </div>
               <button
-                // onClick={signInWithGoogle}
+                onClick={signInWithGoogle}
                 type="button"
                 class="w-full px-4 py-2 font-bold text-white dark:bg-gray-900 rounded-full hover:bg-yellow-400 focus:outline-none focus:shadow-outline"
               >

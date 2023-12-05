@@ -7,6 +7,7 @@ import Team from "../pages/Home/Team/Team";
 import Research from "../pages/Home/Research/Research";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/Login/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +32,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/research",
-        element: <Research></Research>,
+        element: (
+          <PrivateRoute>
+            <Research></Research>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

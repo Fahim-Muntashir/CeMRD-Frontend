@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-// import { AuthContext } from "../../Providers/AuthProvider";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
-  //   const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,8 +16,7 @@ const Login = () => {
 
   const handleSignIn = (event) => {
     event.preventDefault();
-    console.log(password, email);
-    // signIn(email, password);
+    signIn(email, password);
   };
   return (
     <div className="container mx-auto">
@@ -79,12 +83,12 @@ const Login = () => {
               <div className="mb-6 text-center">
                 <input
                   type="submit"
-                  className="w-full px-4 py-2 font-bold text-white bg-yellow-500 rounded-full hover:bg-yellow-400 focus:outline-none focus:shadow-outline"
+                  className="w-full cursor-pointer px-4 py-2 font-bold text-white bg-yellow-500 rounded-full hover:bg-yellow-400 focus:outline-none focus:shadow-outline"
                   value="Sign In"
                 />
               </div>
               <button
-                // onClick={signInWithGoogle}
+                onClick={signInWithGoogle}
                 type="button"
                 class="w-full px-4 py-2 font-bold text-white dark:bg-gray-900 rounded-full hover:bg-yellow-400 focus:outline-none focus:shadow-outline"
               >
