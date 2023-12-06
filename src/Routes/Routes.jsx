@@ -12,6 +12,7 @@ import Dashboard from "../Layout/Dashboard";
 import ManageUser from "../pages/Dashboard/ManageUser";
 import Contact from "../pages/Home/Contact/Contact";
 import NotFound from "../components/shared/NotFound";
+import MyAccount from "../pages/Dashboard/Account/MyAccount";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: "users",
         element: <ManageUser></ManageUser>,
+      },
+      {
+        path: "myaccount",
+        element: <MyAccount></MyAccount>,
       },
     ],
   },
