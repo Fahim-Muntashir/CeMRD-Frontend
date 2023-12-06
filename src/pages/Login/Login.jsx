@@ -16,7 +16,29 @@ const Login = () => {
 
   const handleSignIn = (event) => {
     event.preventDefault();
-    signIn(email, password);
+    console.log(password, email);
+    signIn(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed in successfully",
+      });
+
+      navigate(from, { replace: true });
+    });
   };
   return (
     <div className="container mx-auto">

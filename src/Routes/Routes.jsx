@@ -8,6 +8,10 @@ import Research from "../pages/Home/Research/Research";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/Login/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
+import ManageUser from "../pages/Dashboard/ManageUser";
+import Contact from "../pages/Home/Contact/Contact";
+import NotFound from "../components/shared/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +35,10 @@ export const router = createBrowserRouter([
         element: <Team></Team>,
       },
       {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
         path: "/research",
         element: (
           <PrivateRoute>
@@ -47,5 +55,20 @@ export const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
     ],
+  },
+
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "users",
+        element: <ManageUser></ManageUser>,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <NotFound></NotFound>,
   },
 ]);
