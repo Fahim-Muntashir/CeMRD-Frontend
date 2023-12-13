@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const { createUser, signInWithGoogle, updateUserProfile } =
     useContext(AuthContext);
   const [name, setName] = useState("");
@@ -14,9 +16,22 @@ const SignUp = () => {
     event.preventDefault();
     // console.log(name, email, password, photoURL);
     createUser(email, password).then(() => {
-      updateUserProfile(name, photoURL)
+      updateUserProfile(name, photoURL);
+      // Send user information to your Express server
+      fetch("http://localhost:5000/api/users/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          profileURL: photoURL,
+        }),
+      })
         .then(() => {
           console.log("user prfile update");
+          navigate("/");
           Swal.fire({
             title: "Good job!",
             text: "You clicked the button!",
@@ -30,7 +45,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto my-40">
       <div className="flex justify-center px-6 my-12">
         <div className="w-full xl:w-3/4 lg:w-11/12 flex">
           <div className="w-full lg:w-1/2 bg-white p-5">
@@ -137,7 +152,7 @@ const SignUp = () => {
             className="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover"
             style={{
               backgroundImage:
-                "url('https://images.pexels.com/photos/2328875/pexels-photo-2328875.jpeg?auto=compress&cs=tinysrgb&w=600')",
+                "url('https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8')",
             }}
           ></div>
         </div>

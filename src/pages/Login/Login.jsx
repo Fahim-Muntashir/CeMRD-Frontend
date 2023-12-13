@@ -41,14 +41,14 @@ const Login = () => {
     });
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto my-40">
       <div className="flex justify-center px-6 my-12">
         <div className="w-full xl:w-3/4 lg:w-11/12 flex">
           <div
             className="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
             style={{
               backgroundImage:
-                "url('https://images.pexels.com/photos/5560035/pexels-photo-5560035.jpeg')",
+                "url('https://images.unsplash.com/photo-1537202108838-e7072bad1927?q=80&w=1946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
             }}
           ></div>
           <div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
@@ -112,9 +112,9 @@ const Login = () => {
               <button
                 onClick={signInWithGoogle}
                 type="button"
-                class="w-full px-4 py-2 font-bold text-white dark:bg-gray-900 rounded-full hover:bg-yellow-400 focus:outline-none focus:shadow-outline"
+                class="w-full px-4 py-2 font-bold text-white dark:bg-gray-900 rounded-full hover:bg-yellow-400 focus:outline-none focus:shadow-outline text-primary"
               >
-                Sign in with <span className="text-orange-400">Google</span>
+                Sign in with <span className="text-primary">Google</span>
               </button>
               <hr className="mb-6 border-t" />
               <div className="text-center">
