@@ -21,8 +21,20 @@ function ManageUser() {
       });
     },
     onSuccess: () => {
-      // Trigger a refetch here
-      // For example, if you are using React Query, you can do:
+      refetch();
+    },
+  });
+  const deleteFaqulty = useMutation({
+    queryKey: ["users"],
+    mutationFn: (id) => {
+      return fetch(`http://localhost:5000/api/users/deletefaqulty/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    },
+    onSuccess: () => {
       refetch();
     },
   });
@@ -151,11 +163,15 @@ function ManageUser() {
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                           <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                            <span
-                              aria-hidden
-                              class="absolute inset-0 bg-red-500 opacity-50 rounded-full"
-                            ></span>
-                            <span class="relative">Delete Faculty</span>
+                            <button
+                              onClick={() => deleteFaqulty.mutate(user._id)}
+                            >
+                              <span
+                                aria-hidden
+                                class="absolute inset-0 bg-red-400 opacity-50 rounded-full"
+                              ></span>
+                              <span class="relative">Delete Faculty</span>
+                            </button>
                           </span>
                         </td>
                       </tr>
