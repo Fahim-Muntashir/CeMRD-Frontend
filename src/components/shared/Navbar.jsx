@@ -9,7 +9,9 @@ const Nav = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        localStorage.removeItem("cemrd-access-token");
+      })
       .catch((error) => console.log(error));
   };
 

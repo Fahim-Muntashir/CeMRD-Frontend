@@ -17,28 +17,49 @@ const Login = () => {
   const handleSignIn = (event) => {
     event.preventDefault();
     console.log(password, email);
-    signIn(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
 
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        icon: "success",
-        title: "Signed in successfully",
-      });
+        const loggedUser = {
+          email: user.email,
+        };
 
-      navigate(from, { replace: true });
-    });
+        console.log(loggedUser);
+
+        fetch("http://localhost:5000/api/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+        }).then((res) =>
+          res.json().then((data) => {
+            console.log("Jwt response", data);
+            // Warning : Local storage is not the best place to store token
+            // todo : use here cookies
+            localStorage.setItem("cemrd-access-token", data.token);
+          })
+        );
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Signed in successfully",
+        });
+
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div className="container mx-auto my-40">
