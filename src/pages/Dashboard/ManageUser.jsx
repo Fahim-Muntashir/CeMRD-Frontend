@@ -8,7 +8,12 @@ function ManageUser() {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/api/users");
+      const res = await fetch("http://localhost:5000/api/users", {
+        method: "GET",
+        headers: {
+          authorization: `${token}`,
+        },
+      });
       const responseData = await res.json();
       return responseData.data;
     },
@@ -157,6 +162,7 @@ function ManageUser() {
                           <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                             <button
                               onClick={() => makeFaqulty.mutate(user._id)}
+                              disabled={user.role === "admin"}
                             >
                               <span
                                 aria-hidden

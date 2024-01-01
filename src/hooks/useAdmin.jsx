@@ -1,42 +1,24 @@
-import { useEffect } from "react";
-import axios from "axios";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "./useAuth";
+import useAxiosSecure from "./useAxiosSecure";
 
-const useAxiosSecure = () => {
-  const { logOut } = useContext(AuthContext);
+const useAdmin = () => {
+  const { user } = useAuth();
 
-  const navigate = useNavigate();
+  const [axiosSecure] = useAxiosSecure();
 
-  const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+  const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
+    queryKey: ["isAdmin", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/api/auth/users/admin/${user.email}`);
+
+      console.log("is admin response", res.data.data);
+
+      return res.data.data;
+    },
   });
 
-  useEffect(() => {
-    axiosSecure.interceptors.request.use((config) => {
-      const token = localStorage.getItem("access-token");
-      if (token) {
-        config.headers.Authorization = token;
-      }
-      return config;
-    });
-
-    axiosSecure.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        if (
-          error.response &&
-          (error.response.status === 401 || error.response.status === 403)
-        ) {
-          await logOut();
-          navigate("/login");
-        }
-        return Promise.reject(error);
-      }
-    );
-  }, [logOut, navigate, axiosSecure]);
-  return [axiosSecure];
+  return [isAdmin, isAdminLoading];
 };
 
-export default useAxiosSecure;
+export default useAdmin;

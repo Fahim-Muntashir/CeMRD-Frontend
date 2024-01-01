@@ -2,10 +2,15 @@ import { Outlet } from "react-router-dom";
 import logo from "../../public/Images/logo.png";
 import { FaBlogger } from "react-icons/fa";
 import { GiArchiveResearch } from "react-icons/gi";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   // TODO:load data from the server to thava dynamic isAdmin based on data
-  const isAdmin = true;
+  // const isAdmin = true;
+
+  const [isAdmin] = useAdmin();
+
+  console.log(isAdmin);
 
   return (
     <div className="flex ">

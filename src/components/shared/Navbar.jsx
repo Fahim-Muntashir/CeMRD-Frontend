@@ -1,11 +1,12 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import Logo from "../../../public/Images/logo.png";
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { RxAvatar } from "react-icons/rx";
+import { IoLogOut } from "react-icons/io5";
 
 const Nav = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
 
   const handleLogOut = () => {
     logOut()
@@ -30,26 +31,35 @@ const Nav = () => {
             arrowIcon={false}
             inline
             label={
-              <Avatar
-                alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                rounded
-              />
+              // <Avatar
+              //   alt="User settings"
+              //   img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              //   rounded
+              // />
+              <RxAvatar className="text-4xl text-gray-800" />
             }
           >
             <Dropdown.Header>
               <span className="block text-sm">{user?.displayName}</span>
               <span className="block truncate text-sm font-medium">
-                name@flowbite.com
+                {user?.email}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
-            <Dropdown.Divider />
             <Dropdown.Item>
-              <button onClick={handleLogOut}>Logout</button>
+              <Link to="dashboard">DashBoard</Link>
             </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to="dashboard/profile">Profile</Link>
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <button
+              className="bg-gray-100 font-bold w-full"
+              onClick={handleLogOut}
+            >
+              <Dropdown.Item>
+                Logout <IoLogOut className="text-2xl ms-3" />
+              </Dropdown.Item>
+            </button>
           </Dropdown>
         ) : (
           <Link
