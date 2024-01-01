@@ -1,6 +1,10 @@
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../providers/AuthProvider";
+import { useContext } from "react";
 
 function ManageUser() {
+  const token = localStorage.getItem("access-token");
+
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -16,7 +20,7 @@ function ManageUser() {
       return fetch(`http://localhost:5000/api/users/makefaqulty/${id}`, {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json",
+          authorization: `${token}`,
         },
       });
     },
@@ -24,13 +28,14 @@ function ManageUser() {
       refetch();
     },
   });
+
   const deleteFaqulty = useMutation({
     queryKey: ["users"],
     mutationFn: (id) => {
       return fetch(`http://localhost:5000/api/users/deletefaqulty/${id}`, {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json",
+          authorization: `${token}`,
         },
       });
     },

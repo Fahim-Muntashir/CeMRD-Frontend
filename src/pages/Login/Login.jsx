@@ -27,20 +27,6 @@ const Login = () => {
 
         console.log(loggedUser);
 
-        fetch("http://localhost:5000/api/jwt", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-        }).then((res) =>
-          res.json().then((data) => {
-            console.log("Jwt response", data);
-            // Warning : Local storage is not the best place to store token
-            // todo : use here cookies
-            localStorage.setItem("cemrd-access-token", data.token);
-          })
-        );
-
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
