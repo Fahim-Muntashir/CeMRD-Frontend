@@ -16,6 +16,7 @@ import MyAccount from "../pages/Dashboard/Account/MyAccount";
 import AddBlog from "../pages/Dashboard/Blog/AddBlog";
 import AddResearch from "../pages/Dashboard/Research/AddResearch";
 import Blog from "../components/home/Blog";
+import SingleResearch from "../pages/Home/Research/SingleResearch/SingleResearch";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
             <Research></Research>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/research/:id",
+        element: <SingleResearch></SingleResearch>,
       },
       {
         path: "/login",

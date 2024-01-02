@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Research = () => {
+  const navigate = useNavigate();
+
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["researches"],
     queryFn: async () => {
@@ -16,7 +19,11 @@ const Research = () => {
     },
   });
 
-  console.log(data);
+  const handleViewDetails = (researchId) => {
+    console.log(researchId);
+
+    navigate(`/research/${researchId}`);
+  };
 
   return (
     <div>
@@ -49,13 +56,13 @@ const Research = () => {
                   <p className="mt-2">{research.challangeDescription}</p>
                 </div>
                 <div className="flex items-center justify-between mt-4">
-                  <a
+                  <button
                     rel="noopener noreferrer"
-                    href="#"
-                    className="hover:underline dark:text-violet-400"
+                    className="hover:underline text-blue-700"
+                    onClick={() => handleViewDetails(research._id)}
                   >
                     Read more
-                  </a>
+                  </button>
                 </div>
               </div>
               <div className="md:col-span-3">
