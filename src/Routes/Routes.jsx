@@ -17,6 +17,7 @@ import AddBlog from "../pages/Dashboard/Blog/AddBlog";
 import AddResearch from "../pages/Dashboard/Research/AddResearch";
 import SingleResearch from "../pages/Home/Research/SingleResearch/SingleResearch";
 import Blog from "../pages/Home/Blog/Blog";
+import SingleBlog from "../pages/Home/Blog/SingleBlog/SingleBlog";
 
 export const router = createBrowserRouter([
   {
@@ -44,16 +45,16 @@ export const router = createBrowserRouter([
         element: <Blog />,
       },
       {
+        path: "/blog/:id",
+        element: <SingleBlog></SingleBlog>,
+      },
+      {
         path: "/contact",
         element: <Contact></Contact>,
       },
       {
         path: "/research",
-        element: (
-          <PrivateRoute>
-            <Research></Research>
-          </PrivateRoute>
-        ),
+        element: <Research></Research>,
       },
       {
         path: "/research/:id",
@@ -72,7 +73,12 @@ export const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <Dashboard />,
+
+    element: (
+      <PrivateRoute>
+        <Dashboard />{" "}
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "users",

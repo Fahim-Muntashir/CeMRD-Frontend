@@ -26,7 +26,7 @@ const Blog = () => {
     const handleViewDetails = (researchId) => {
         console.log(researchId);
 
-        navigate(`/research/${researchId}`);
+        navigate(`/blog/${researchId}`);
     };
 
     return (
@@ -74,7 +74,7 @@ const Blog = () => {
 
                 <div className="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
                     {
-                        data.map((data) => (
+                        data?.map(blog => (
                             <div className="overflow-hidden transition-shadow duration-300 bg-white rounded shadow-sm">
                                 <img
                                     src="https://images.pexels.com/photos/2408666/pexels-photo-2408666.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500"
@@ -99,19 +99,23 @@ const Blog = () => {
                                         title="Visit the East"
                                         className="inline-block mb-3 text-2xl font-bold leading-5 transition-colors duration-200 hover:text-deep-purple-accent-700"
                                     >
-                                        Visit the East
+                                        {
+                                            blog.title
+                                        }
                                     </a>
                                     <p className="mb-2 text-gray-700">
-                                        Sed ut perspiciatis unde omnis iste natus error sit sed quia
-                                        consequuntur magni voluptatem doloremque.
+                                        {
+                                            blog.subtitle
+                                        }
                                     </p>
-                                    <a
-                                        href="/"
+                                    <button
                                         aria-label=""
                                         className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                                        onClick={() => handleViewDetails(blog._id)}
+
                                     >
                                         Learn more
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         ))
