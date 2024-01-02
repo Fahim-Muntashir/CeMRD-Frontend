@@ -13,6 +13,8 @@ import ManageUser from "../pages/Dashboard/ManageUser";
 import Contact from "../pages/Home/Contact/Contact";
 import NotFound from "../components/shared/NotFound";
 import MyAccount from "../pages/Dashboard/Account/MyAccount";
+import AddBlog from "../pages/Dashboard/Blog/AddBlog";
+import AddResearch from "../pages/Dashboard/Research/AddResearch";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +71,18 @@ export const router = createBrowserRouter([
       {
         path: "myaccount",
         element: <MyAccount></MyAccount>,
+      },
+      {
+        path: "addblog",
+        element: <AddBlog></AddBlog>,
+      },
+      {
+        path: "addblog",
+        element: <AddBlog></AddBlog>,
+      },
+      {
+        path: "addresearch",
+        element: <AddResearch></AddResearch>,
       },
     ],
   },

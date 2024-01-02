@@ -4,9 +4,15 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { RxAvatar } from "react-icons/rx";
 import { IoLogOut } from "react-icons/io5";
+import userRole from "../../hooks/userRole";
 
 const Nav = () => {
   const { user, logOut } = useAuth();
+  const [role] = userRole();
+
+  const normalUser = role === "user";
+
+  console.log(normalUser);
 
   const handleLogOut = () => {
     logOut()
@@ -45,12 +51,19 @@ const Nav = () => {
                 {user?.email}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>
-              <Link to="dashboard">DashBoard</Link>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Link to="dashboard/profile">Profile</Link>
-            </Dropdown.Item>
+
+            {normalUser || (
+              <>
+                <Dropdown.Item>
+                  <Link to="dashboard">DashBoard</Link>
+                </Dropdown.Item>
+
+                <Dropdown.Item>
+                  <Link to="dashboard/profile">Profile</Link>
+                </Dropdown.Item>
+              </>
+            )}
+
             <Dropdown.Divider />
             <button
               className="bg-gray-100 font-bold w-full"

@@ -60,7 +60,7 @@ function ManageUser() {
             <div class="my-2 flex sm:flex-row flex-col">
               <div class="flex flex-row mb-1 sm:mb-0">
                 <div class="relative">
-                  <select class="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                  <select class="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option>5</option>
                     <option>10</option>
                     <option>20</option>
@@ -176,6 +176,7 @@ function ManageUser() {
                           <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                             <button
                               onClick={() => deleteFaqulty.mutate(user._id)}
+                              disabled={user.role === "admin"}
                             >
                               <span
                                 aria-hidden
