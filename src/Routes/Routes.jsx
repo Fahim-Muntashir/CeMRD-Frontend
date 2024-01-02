@@ -15,6 +15,7 @@ import NotFound from "../components/shared/NotFound";
 import MyAccount from "../pages/Dashboard/Account/MyAccount";
 import AddBlog from "../pages/Dashboard/Blog/AddBlog";
 import AddResearch from "../pages/Dashboard/Research/AddResearch";
+import Blog from "../components/home/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/team",
         element: <Team></Team>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
       },
       {
         path: "/contact",
