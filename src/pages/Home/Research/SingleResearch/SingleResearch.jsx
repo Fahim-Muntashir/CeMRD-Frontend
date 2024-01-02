@@ -26,8 +26,6 @@ const SingleResearch = () => {
     fetchData();
   }, [id]);
 
-  console.log(data);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -42,7 +40,7 @@ const SingleResearch = () => {
         <div className="p-5 mx-auto sm:p-10 md:p-16 dark:bg-gray-800 dark:text-gray-100">
           <div className="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
             <img
-              src="https://source.unsplash.com/random/480x360"
+              src={data.researchImg}
               alt=""
               className="w-full h-60 sm:h-96 dark:bg-gray-500"
             />
@@ -53,7 +51,7 @@ const SingleResearch = () => {
                   href="#"
                   className="inline-block text-2xl font-semibold sm:text-3xl"
                 >
-                  The Best Activewear from the Nordstrom Anniversary Sale
+                  {data.challangeTitle}
                 </a>
                 <p className="text-xs dark:text-gray-400">
                   By
@@ -67,7 +65,19 @@ const SingleResearch = () => {
                 </p>
               </div>
               <div className="dark:text-gray-100">
-                <p>Insert the actual text content here...</p>
+                <p>{data.challangeDescription}</p>
+              </div>
+              <div className="space-y-2">
+                <a
+                  rel="noopener noreferrer"
+                  href="#"
+                  className="inline-block text-2xl font-semibold sm:text-3xl"
+                >
+                  {data.responseTitle}
+                </a>
+              </div>
+              <div className="dark:text-gray-100">
+                <p>{data.responseDescription}</p>
               </div>
             </div>
           </div>

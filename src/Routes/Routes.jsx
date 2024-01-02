@@ -15,8 +15,8 @@ import NotFound from "../components/shared/NotFound";
 import MyAccount from "../pages/Dashboard/Account/MyAccount";
 import AddBlog from "../pages/Dashboard/Blog/AddBlog";
 import AddResearch from "../pages/Dashboard/Research/AddResearch";
-import Blog from "../components/home/Blog";
 import SingleResearch from "../pages/Home/Research/SingleResearch/SingleResearch";
+import Blog from "../pages/Home/Blog/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/blog",
-        element: <Blog></Blog>,
+        element: <Blog />,
       },
       {
         path: "/contact",
