@@ -19,6 +19,7 @@ import SingleResearch from "../pages/Home/Research/SingleResearch/SingleResearch
 import Blog from "../pages/Home/Blog/Blog";
 import SingleBlog from "../pages/Home/Blog/SingleBlog/SingleBlog";
 import ManageResearch from "../pages/Dashboard/ManageResarch/ManageResearch";
+import ManageBlog from "../pages/Dashboard/ManageBlog/ManageBlog";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
       {
         path: "manageresearch",
         element: <ManageResearch />,
+      },
+      {
+        path: "manageblog",
+        element: <ManageBlog></ManageBlog>,
       },
       {
         path: "addblog",

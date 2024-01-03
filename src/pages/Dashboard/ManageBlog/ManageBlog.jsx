@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-const ManageResearch = () => {
+const ManageBlog = () => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["researches"],
     queryFn: async () => {
@@ -92,4 +92,4 @@ const ManageResearch = () => {
   );
 };
 
-export default ManageResearch;
+export default ManageBlog;
